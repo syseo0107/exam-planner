@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>시험공부 플래너</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>시험공부 플래너</h1>
+
+    <section id="input-section">
+      <h2>과목 등록</h2>
+      <div id="error-message" role="alert"></div>
+      <form id="subject-form">
+        <label>
+          과목 이름
+          <input type="text" id="subject-name" />
+        </label>
+        <label>
+          시험 날짜
+          <input type="date" id="exam-date" />
+        </label>
+        <label>
+          총 공부 분량
+          <input type="number" id="total-volume" min="1" />
+        </label>
+        <button type="submit">등록하기</button>
+      </form>
+    </section>
+
+    <section id="today-summary-section">
+      <h2>오늘 요약</h2>
+      <div id="today-summary"></div>
+    </section>
+
+    <section id="subject-list-section">
+      <h2>등록된 과목</h2>
+      <div id="subject-list"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

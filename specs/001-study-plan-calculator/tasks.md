@@ -6,21 +6,21 @@
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-- [ ] T001 빈 프로젝트 스켈레톤 파일 생성: `index.html`, `style.css`, `app.js`, `test.html`
-- [ ] T002 입력 폼, 과목 목록, 오늘 요약 섹션을 포함한 기본 HTML 골격을 `index.html`에 추가
-- [ ] T003 폼과 요약 섹션 자리 표시자를 포함한 기본 스타일 시트 `style.css`를 추가
-- [ ] T004 브라우저에서 실행할 테스트와 초기 결과 표시를 위한 스크립트 영역을 `test.html`에 추가
+- [x] T001 빈 프로젝트 스켈레톤 파일 생성: `index.html`, `style.css`, `app.js`, `test.html`
+- [x] T002 입력 폼, 과목 목록, 오늘 요약 섹션을 포함한 기본 HTML 골격을 `index.html`에 추가
+- [x] T003 폼과 요약 섹션 자리 표시자를 포함한 기본 스타일 시트 `style.css`를 추가
+- [x] T004 브라우저에서 실행할 테스트와 초기 결과 표시를 위한 스크립트 영역을 `test.html`에 추가
 
 ---
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-- [ ] T005 [P] `app.js`에 `id`, `name`, `examDate`, `totalVolume`, `remainingVolume`, `completedToday` 필드를 갖는 공부 과목 데이터 모델 정의
-- [ ] T006 [P] `app.js`에 localStorage에서 과목 데이터를 저장하고 복원하는 헬퍼 함수 구현
-- [ ] T007 [P] `app.js`에 과목 이름, 시험 날짜, 총 공부 분량에 대한 입력 검증 유틸리티 구현
-- [ ] T008 [P] `app.js`에 로컬 D-Day를 계산하고 자정 경계 케이스를 처리하는 날짜 유틸리티 구현
-- [ ] T009 [P] `index.html`에 공통 오류 표시 영역 추가 및 `app.js`에서 한국어 검증 메시지 연결
-- [ ] T010 [P] 여러 과목과 오늘 학습량 요약을 표시할 자리 표시자 UI 섹션을 `index.html`에 추가
+- [x] T005 [P] `app.js`에 `id`, `name`, `examDate`, `totalVolume`, `remainingVolume`, `completedToday` 필드를 갖는 공부 과목 데이터 모델 정의
+- [x] T006 [P] `app.js`에 localStorage에서 과목 데이터를 저장하고 복원하는 헬퍼 함수 구현
+- [x] T007 [P] `app.js`에 과목 이름, 시험 날짜, 총 공부 분량에 대한 입력 검증 유틸리티 구현
+- [x] T008 [P] `app.js`에 로컬 D-Day를 계산하고 자정 경계 케이스를 처리하는 날짜 유틸리티 구현
+- [x] T009 [P] `index.html`에 공통 오류 표시 영역 추가 및 `app.js`에서 한국어 검증 메시지 연결
+- [x] T010 [P] 여러 과목과 오늘 학습량 요약을 표시할 자리 표시자 UI 섹션을 `index.html`에 추가
 
 ---
 
@@ -32,15 +32,15 @@
 
 ### Tests for User Story 1
 
-- [ ] T011 [P] [US1] `test.html`에 과목 등록 검증과 저장 동작을 확인하는 브라우저 테스트 추가
-- [ ] T012 [P] [US1] `test.html`에 D-Day 계산과 남은 분량 표시를 확인하는 브라우저 테스트 추가
+- [x] T011 [P] [US1] `test.html`에 과목 등록 검증과 저장 동작을 확인하는 브라우저 테스트 추가
+- [x] T012 [P] [US1] `test.html`에 D-Day 계산과 남은 분량 표시를 확인하는 브라우저 테스트 추가
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] `app.js`에서 과목 등록 폼 처리 로직을 구현하고 데이터를 `localStorage`에 저장
-- [ ] T014 [US1] `index.html`에 등록된 과목을 D-Day와 남은 분량과 함께 렌더링하는 기능을 `app.js`에 구현
-- [ ] T015 [US1] 등록 입력이 잘못된 경우 `index.html`에 한국어 검증 메시지를 표시
-- [ ] T016 [US1] 페이지 로드 시 `localStorage`에서 등록된 과목 데이터를 복원하도록 구현
+- [x] T013 [US1] `app.js`에서 과목 등록 폼 처리 로직을 구현하고 데이터를 `localStorage`에 저장
+- [x] T014 [US1] `index.html`에 등록된 과목을 D-Day와 남은 분량과 함께 렌더링하는 기능을 `app.js`에 구현
+- [x] T015 [US1] 등록 입력이 잘못된 경우 `index.html`에 한국어 검증 메시지를 표시
+- [x] T016 [US1] 페이지 로드 시 `localStorage`에서 등록된 과목 데이터를 복원하도록 구현
 
 ---
 

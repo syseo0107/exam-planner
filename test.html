@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>시험공부 플래너 테스트</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    .result { margin-bottom: 12px; }
+    .pass { color: green; }
+    .fail { color: red; }
+  </style>
+</head>
+<body>
+  <h1>시험공부 플래너 테스트</h1>
+  <div id="results"></div>
+  <script src="app.js"></script>
+  <script>
+    const results = document.getElementById('results');
+
+    function assertEqual(actual, expected, message) {
+      const resultItem = document.createElement('div');
+      resultItem.className = 'result';
+      if (actual === expected) {
+        resultItem.textContent = `PASS: ${message}`;
+        resultItem.classList.add('pass');
+      } else {
+        resultItem.textContent = `FAIL: ${message} (actual: ${actual}, expected: ${expected})`;
+        resultItem.classList.add('fail');
+      }
+      results.appendChild(resultItem);
+    }
+
+    function testCalculateDaysRemaining() {
+      const today = new Date();
+      const todayStr = today.toISOString().slice(0, 10);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      const tomorrowStr = tomorrow.toISOString().slice(0, 10);
+
+      assertEqual(calculateDaysRemaining(todayStr), 0, '오늘 시험일은 D-Day 0이어야 함');
+      assertEqual(calculateDaysRemaining(tomorrowStr), 1, '내일 시험일은 D-1이어야 함');
+    }
+
+    function testValidateInput() {
+      assertEqual(validateInput('', '2026-12-31', 10), '과목 이름을 입력해주세요.', '과목 이름이 비어있으면 오류 메시지 출력');
+      assertEqual(validateInput('국어', '', 10), '시험 날짜를 선택해주세요.', '시험 날짜가 비어있으면 오류 메시지 출력');
+      assertEqual(validateInput('국어', 'invalid-date', 10), '유효한 시험 날짜를 입력해주세요.', '잘못된 날짜 형식 검증');
+      assertEqual(validateInput('국어', '1900-01-01', 10), '시험일은 오늘 이후여야 합니다.', '과거 날짜는 오류 처리');
+      assertEqual(validateInput('국어', '2026-12-31', 0), '총 공부 분량은 1 이상이어야 합니다.', '0 이하 분량은 오류 처리');
+    }
+
+    function testTodaySummaryCalculation() {
+      const today = getTodayDate();
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      const examDate = tomorrow.toISOString().slice(0, 10);
+
+      const subject = {
+        id: '1',
+        name: '수학',
+        examDate,
+        totalVolume: 10,
+        remainingVolume: 10,
+        completedToday: false,
+      };
+
+      const dDay = calculateDaysRemaining(subject.examDate);
+      const todayVolume = Math.ceil(subject.remainingVolume / (dDay + 1));
+
+      assertEqual(dDay, 1, '오늘 기준 내일 시험인 경우 D-Day는 1');
+      assertEqual(todayVolume, 10, '남은 1일에 10단위가 오늘 분량');
+    }
+
+    testCalculateDaysRemaining();
+    testValidateInput();
+    testTodaySummaryCalculation();
+  </script>
+</body>
+</html>
