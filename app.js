@@ -60,12 +60,12 @@ function calculateWeightedDays(examDateString) {
 }
 
 function calculateTodayVolume(subject) {
-  const dDay = calculateDaysRemaining(subject.examDate);
   const today = getTodayDate();
   const currentWeight = isWeekend(today) ? 0.5 : 1;
   const totalWeight = calculateWeightedDays(subject.examDate);
   const baseVolume = subject.remainingVolume / totalWeight;
 
+  // 가중 일수는 소수점 그대로 유지하고, 오늘 분량은 올림하여 정수로 표시한다.
   return Math.max(Math.ceil(baseVolume * currentWeight), 0);
 }
 
