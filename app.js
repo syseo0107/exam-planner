@@ -39,6 +39,36 @@ function calculateDaysRemaining(examDateString) {
   return diffDays;
 }
 
+function isWeekend(date) {
+  const day = date.getDay();
+  return day === 0 || day === 6;
+}
+
+function calculateWeightedDays(examDateString) {
+  const today = getTodayDate();
+  const examDate = new Date(examDateString);
+  const totalDays = calculateDaysRemaining(examDateString) + 1;
+  let weightedSum = 0;
+
+  for (let i = 0; i < totalDays; i += 1) {
+    const current = new Date(today);
+    current.setDate(today.getDate() + i);
+    weightedSum += isWeekend(current) ? 0.5 : 1;
+  }
+
+  return Math.max(weightedSum, 1);
+}
+
+function calculateTodayVolume(subject) {
+  const dDay = calculateDaysRemaining(subject.examDate);
+  const today = getTodayDate();
+  const currentWeight = isWeekend(today) ? 0.5 : 1;
+  const totalWeight = calculateWeightedDays(subject.examDate);
+  const baseVolume = subject.remainingVolume / totalWeight;
+
+  return Math.max(Math.ceil(baseVolume * currentWeight), 0);
+}
+
 function validateInput(name, examDate, totalVolume) {
   if (!name.trim()) {
     return '과목 이름을 입력해주세요.';
@@ -110,13 +140,10 @@ function renderTodaySummary(subjects) {
     row.className = 'summary-item';
 
     const dDay = calculateDaysRemaining(subject.examDate);
-    const todayVolume = Math.max(
-      Math.ceil(subject.remainingVolume / (dDay + 1)),
-      0
-    );
+    const todayVolume = calculateTodayVolume(subject);
     const dDayText = dDay === 0 ? 'D-Day 0' : `D-${dDay}`;
 
-    row.textContent = `${subject.name}: ${dDayText}, 오늘 공부할 분량 ${todayVolume} 단위`; 
+    row.textContent = `${subject.name}: ${dDayText}, 오늘 공부할 분량 ${todayVolume} 단위`;
     todaySummary.appendChild(row);
   });
 }

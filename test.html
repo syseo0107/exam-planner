@@ -72,9 +72,29 @@
       assertEqual(todayVolume, 10, '남은 1일에 10단위가 오늘 분량');
     }
 
+    function testWeekendHalfDistribution() {
+      const originalGetTodayDate = getTodayDate;
+      getTodayDate = () => new Date(2026, 7, 7); // 2026-08-07 토요일
+
+      const subject = {
+        id: '1',
+        name: '과학',
+        examDate: '2026-08-10',
+        totalVolume: 10,
+        remainingVolume: 10,
+        completedToday: false,
+      };
+
+      assertEqual(calculateWeightedDays(subject.examDate), 2.5, '주말 절반 가중치가 포함된 총 가중치 합계 계산');
+      assertEqual(calculateTodayVolume(subject), 3, '토요일의 오늘 분량은 주말 절반 가중치와 올림 처리를 반영해야 함');
+
+      getTodayDate = originalGetTodayDate;
+    }
+
     testCalculateDaysRemaining();
     testValidateInput();
     testTodaySummaryCalculation();
+    testWeekendHalfDistribution();
   </script>
 </body>
 </html>
